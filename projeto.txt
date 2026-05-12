@@ -1,0 +1,194 @@
+1: Nome: Tabela da Copa 2026
+ 
+2: Versão: 1.0
+ 
+3: Escopo
+- Objetivo: (precisa descrever o problema que ele resolve). Disponibilizar os resultados dos jogos da Copa do Mundo de 2026 em formato aberto e acessível a todos.
+- Público-alvo: Pessoas com interesse por futebol
+- Limitações (o que o sistema não faz)
+ 
+4: Requisitos Funcionais (RF) - O que o sistema deve fazer
+ 
+5: Requisitos Não Funcionais (RNF) - Aspectos de qualidade (segurança, disponibilidade, acessibilidade, etc)
+ 
+6: Diagramas UML - Orientação a Objeto
+6.1: - Diagrama de Classe
+6.2: - Diagrama de Caso de Uso
+ 
+7: Modelo de Dados (MER - Modelo Entidade-Relacionamento) (UC3)
+ 
+8: Arquitetura
+- MVC
+- Monolito
+- Microserviços JSON
+- REST
+- Camadas (apresentação + regra de negócios + dados)
+ 
+9: Plano de Testes
+ 
+10: Cronograma
+ 
+11: DevOps e Implantação
+- Versionamento (Git)
+- Estratégia de backup
+- Ambiente de produção (Local, Cloud, VPS, Docker, host compartilhado, etc)
+ 
+12: Segurança e LGPD
+- Política de privacidade
+    • informar quais dados serão coletados
+    • Como esses dados serão usados
+    •
+ 
+- Proteção dos dados
+Ameaça = Agente + Mecanismo + Ativo
+ 
+LGPD: Empresa -> pessoa física
+ 
+13: Investimento 
+- Fórmula = horas * valor da sua hora
+ 
+ 
+48 seleções
+12 grupos de 4 seleções. Os grupos são identificados por letras: A a L
+Os 2 primeiros colocados avançam para a próxima fase, totalizando 24.
+Os 8 melhores colocados dentre restantes também avançam para a próxima fase, totalizando assim, 32 seleções
+Segunda fase em diante funcionará com o sistema mata mata onde o vencedor avança para a próxima fase, até ser campeão.
+Observar o chaveamento
+Na primeira fase o ranking dos grupos será definido pela ordem dos seguintes critérios de desempate:
+Pontos, saldo de gols, número de vitórias, etc
+ 
+ 
+Classe
+- características (o que ele tem | armazenado em banco)
+- comportamentos (o que ele faz | programável)
+ 
+Seleção
+- nome			variável	|	Campo
+- bandeira
+- abreviação
++ jogar
+ 
+Grupo
+- nome
+ 
+Sede
+- pais
+- cidade
+- estádio
+- capacidade do estádio
+ 
+Partida
+- data
+- horário
+- Sede
+ 
+-------------------------------
+ 
+ANÁLISE DE REQUISITOS
+ 
+RF01 - Gestão de Grupos: O sistema deve permitir o cadastro dos grupos de A a L.
+ 
+RF02 - Gestão de Seleções: O sistema deve permitir o cadastro das 48 seleções, incluindo o nome, bandeira, abreviação e grupo.
+Regra: O grupo deve ser selecionado do cadastro de grupos existente.
+ 
+RF03 - Gestão de Sedes: O sistema deve permitir o cadastro das sedes, incluindo o nome do país, a cidade, o estádio e a capacidade do estádio.
+ 
+RF04 - Gestão de Partidas: O sistema deve permitir o cadastro das partidas, incluindo a data, horário, sede, seleção mandante e a seleção visitante.
+Regras:
+- A sede deve ser selecionada
+- As seleções mandantes e visitantes devem ser selecionadas
+ 
+Create	- Incluir
+Read	- Consultar
+Update	- Alterar
+Delete	- Excluir / fake
+ 
+RF05 - Tabela das partidas: O sistema deve permitir a criação da tabela com as partidas para visualização pelo usuário.
+Regras: As partidas precisam ser organizadas em grupo e em data cronológica.
+ 
+RF06 - Resultado das partidas: O sistema deve permitir a inclusão dos resultados das partidas com a opção de incluir a quantidade de gols que cada seleção marcou.
+Regras: Os resultados devem ser igual ou maior que zero.
+ 
+RF07 - Classificação: O sistema deve permitir a visualização do ranking de cada grupo, mostrando os melhores classificados em primeiro.
+Regras: Os critérios para geração do ranking deve ser:
+- pontuação
+- número de vitórias
+- saldo de gols
+- verificar...
+ 
+RF08 - Avanço de fase: O sistema deve calcular quais seleções irão avançar para a próxima fase.
+Regras da primeira para a segunda fase: 
+- Os 2 primeiros colocados avançam para a próxima fase, totalizando 24.
+- Os 8 melhores colocados dentre restantes também avançam para a próxima fase, totalizando assim, 32 seleções
+- Demais regras de avanço nas próximas fases: verificar...
+ 
+=================================================================
+ 
+Entidades: (banco de dados)
+ 
+Seleção
+- abreviacao (identificação)		| string	PRIMARY KEY
+- nome					| string
+- bandeira				| string
+ 
+Grupo
+- id					| int
+- nome					| string
+- fase					| string    
+ 
+Sede
+- id					| int		PRIMARY KEY
+- pais					| string
+- cidade				| string
+- estádio				| string
+- capacidade do estádio			| int
+ 
+Partida
+- id 					| int
+- data					| date
+- horário				| time
+- Sede					| int		FOREIGN KEY (Sede:id)
+- mandante				| string	FOREIGN KEY (Selecao:abrevicao)
+- visitante				| string 	FOREIGN KEY (Selecao:abrevicao)
+ 
+ 
+=====================================================
+ 
+• ALT + 0149
+© ALT + 0169
+» ALT + 0187
+® ALT + 0174
+ 
+ASCII
+Windowns-1252
+Unicode
+ 
+ESTUDAR:ESTRUTURA DE DADOS
+ 
+Requisitos técnicos:
+ 
+Desktop:
+- linguagem: C#                     / Visual Studio 2022
+- banco de dados:                   / PostegreSQL
+- infraestrutura de hospedagem:     / Windowns 10 ou superior / 16GB RAM / i3 / 240GB
+ 
+Web:
+- linguagens:
+       - Front-end: HTML, CSS, Javascript, React
+       - Back-end: Node.js, Javascript, PHP (possivelmente)
+- banco de dados: MySQL / MariaDB
+- infraestrutura de hospedagem: Hospedagem web: 1vCPU, 2GB RAM, 50GB SSD
+- Domínio (registro.br)
+- serviço de segurança - Cloudflare ou similar
+ 
+Mobile:
+- linguagens: React Native com Javascript
+- banco de dados: sem uso / API
+- infraestrutura de hospedagem: Expo (ambiente que simula as lojas do Android e iPhone)
+ 
+ 
+Navegador -> Registro.br -> Hospedagem
+ 
+Navegador -> Registro.br -> Cloudflare -> Hospedagem
+ 
+conceito de Objetivo
